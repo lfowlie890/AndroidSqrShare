@@ -4,9 +4,13 @@
     android:layout_height="fill_parent"
     android:background="@drawable/background" android:orientation="vertical">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:id="@+id/tap_to_scan"
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent" 
-    	android:layout_gravity="top" android:layout_weight="1" android:orientation="vertical">
+    	android:layout_gravity="top" 
+    	android:layout_weight="1" 
+    	android:clickable="true"
+    	android:orientation="vertical">
    		<TextView android:textColor="@android:color/white" android:layout_height="wrap_content" android:textSize="40dip" android:id="@+id/home" android:layout_width="wrap_content" android:text="Home" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"></TextView>
    		<TextView android:layout_height="wrap_content" android:textSize="20dip" android:textColor="@android:color/white" android:layout_margin="0dip" android:id="@+id/double_tap" android:layout_width="wrap_content" android:text="double tap to zoom" android:layout_below="@+id/home" android:layout_centerHorizontal="true" android:layout_marginTop="20dp"></TextView>
    		<ImageView android:id="@+id/rightarrow" android:src="@drawable/clock_hand_minute" android:layout_height="105dp" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/double_tap" android:layout_marginTop="20dp"></ImageView>
@@ -25,6 +29,7 @@
         	android:background="@android:color/transparent"></ImageButton>
         <ImageButton android:src="@drawable/ic_menu_recent_history" 
 	        android:id="@+id/imageButton2" 
+	        android:onClick="show"
 	        android:layout_height="65dp" 
 	        android:layout_weight="0.50" 
 	        android:layout_width="0dp" 
