@@ -6,6 +6,7 @@
     <uses-sdk android:minSdkVersion="8" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+    	<uses-library android:name="com.google.android.maps" />
         <activity android:name=".AndroidSqrShareActivity"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar">
@@ -13,6 +14,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
         <activity android:name="com.google.zxing.client.android.CaptureActivity"
               android:screenOrientation="landscape"
@@ -49,7 +51,14 @@
 	        <data android:scheme="http" android:host="www.google.co.uk" android:path="/m/products/scan"/>
 	      </intent-filter>
 	    </activity>
-
+	    <activity android:name=".MainCompanyActivity" android:theme="@android:style/Theme.NoTitleBar">
+	    </activity>
+	    <activity android:name=".tabactivities.CompanyInfoActivity"></activity>
+		<activity android:name=".tabactivities.LocationActivity"></activity>
+		<activity android:name=".tabactivities.HoursActivity"></activity>
+		<activity android:name=".tabactivities.PhotosActivity"></activity>
+		<activity android:name=".tabactivities.CommentActivity"></activity>
+		
     </application>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>

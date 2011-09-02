@@ -1,7 +1,6 @@
 package com.sqrshare.android;
 
 import com.google.zxing.client.android.CaptureActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
