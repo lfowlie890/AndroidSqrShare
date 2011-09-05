@@ -1,6 +1,7 @@
 package com.sqrshare.android;
 
 import com.google.zxing.client.android.CaptureActivity;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -64,6 +65,7 @@ public class AndroidSqrShareActivity extends Activity {
     	@Override
     	public boolean onDoubleTapEvent(MotionEvent e){
     		startActivity(new Intent(context, CaptureActivity.class));
+    		overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 			return true;
     		
     	}
