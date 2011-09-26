@@ -11,6 +11,7 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TabHost;
 
 public class MainCompanyActivity extends TabActivity{
@@ -59,6 +60,14 @@ public class MainCompanyActivity extends TabActivity{
 	    tabHost.addTab(spec);
 
 	    tabHost.setCurrentTab(2);
+	}
+	
+	public void share(View v){
+		Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.putExtra(Intent.EXTRA_SUBJECT, "SqrShare Code");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, "");
+		startActivity(Intent.createChooser(shareIntent, "title"));
 	}
 
 }
