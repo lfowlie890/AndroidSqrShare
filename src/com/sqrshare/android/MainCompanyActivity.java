@@ -42,24 +42,24 @@ public class MainCompanyActivity extends TabActivity{
 	    tabHost.addTab(spec);
 
 	    intent = new Intent().setClass(this, HoursActivity.class);
-	    spec = tabHost.newTabSpec("songs").setIndicator("Songs",
+	    spec = tabHost.newTabSpec("songs").setIndicator("",
 	                      res.getDrawable(R.drawable.ic_tab_hours))
 	                  .setContent(intent);
 	    tabHost.addTab(spec);
 	    
 	    intent = new Intent().setClass(this, PhotosActivity.class);
-	    spec = tabHost.newTabSpec("songs").setIndicator("Songs",
+	    spec = tabHost.newTabSpec("songs").setIndicator("",
 	                      res.getDrawable(R.drawable.ic_tab_photos))
 	                  .setContent(intent);
 	    tabHost.addTab(spec);
 	    
 	    intent = new Intent().setClass(this, CommentActivity.class);
-	    spec = tabHost.newTabSpec("songs").setIndicator("Songs",
+	    spec = tabHost.newTabSpec("songs").setIndicator("",
 	                      res.getDrawable(R.drawable.ic_tab_comment))
 	                  .setContent(intent);
 	    tabHost.addTab(spec);
 
-	    tabHost.setCurrentTab(2);
+	    tabHost.setCurrentTab(0);
 	}
 	
 	public void share(View v){

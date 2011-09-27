@@ -167,7 +167,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     inactivityTimer = new InactivityTimer(this);
     beepManager = new BeepManager(this);
 
-    showHelpOnFirstLaunch();
+    //showHelpOnFirstLaunch();
   }
 
   @Override
@@ -579,7 +579,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
    */
   private boolean showHelpOnFirstLaunch() {
     try {
-      PackageInfo info = getPackageManager().getPackageInfo(PACKAGE_NAME, 0);
+      PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
       int currentVersion = info.versionCode;
       // Since we're paying to talk to the PackageManager anyway, it makes sense to cache the app
       // version name here for display in the about box later.

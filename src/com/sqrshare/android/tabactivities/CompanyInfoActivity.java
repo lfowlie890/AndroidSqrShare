@@ -11,6 +11,7 @@ public class CompanyInfoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
         TextView textview = new TextView(this);
+        
         textview.setText("This is the Artists tab");
         setContentView(textview);
 	}
