@@ -124,4 +124,11 @@
   <string name="wifi_ssid_label">Network Name</string>
   <string name="wifi_type_label">Type</string>
   <string name="zxing_url">http://code.google.com/p/zxing</string>
+  
+  <string name="API_KEY">4b2d7ef98d720386e0d2022842847404</string>
+  <string name="SERVER">http://sqrs.co</string>
+  <string name="sharedpreferences_name">UserAuth</string>
+  <string name="DOMAIN">sqrs.co</string>
+  <string name="ALGORITHM">HmacSHA256</string>
+  <string name="SESSION.LIFETIME">1209600</string>
 </resources>
