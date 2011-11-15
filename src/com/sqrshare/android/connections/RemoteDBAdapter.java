@@ -13,7 +13,7 @@ public class RemoteDBAdapter {
 
     public JSONObject nodeGet(int nodeID) throws Exception
     {
-        RestClient c = new RestClient(server + "node/" + nodeID);
+        RestClient c = new RestClient(server + "/node/" + nodeID);
         c.AddHeader("Accept", "application/json");
         c.AddHeader("Content-type", "application/json");
 

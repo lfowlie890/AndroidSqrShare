@@ -15,8 +15,9 @@
   <uses-feature android:name="android.hardware.camera"/>
     <application android:icon="@drawable/icon" android:label="@string/app_name">
     	<uses-library android:name="com.google.android.maps" />
-        <activity android:name=".AndroidSqrShareActivity"
+        <activity android:name=".AndroidSqrShareActivity"        			
                   android:label="@string/app_name"
+                  android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,16 +59,19 @@
 	        <data android:scheme="http" android:host="www.google.co.uk" android:path="/m/products/scan"/>
 	      </intent-filter>
 	    </activity>
-	    <activity android:name=".MainCompanyActivity" android:theme="@android:style/Theme.NoTitleBar">
+	    <activity android:name=".MainCompanyActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait">
 	    </activity>
 	    <activity android:name=".tabactivities.CompanyInfoActivity"></activity>
 		<activity android:name=".tabactivities.LocationActivity"></activity>
 		<activity android:name=".tabactivities.HoursActivity"></activity>
 		<activity android:name=".tabactivities.PhotosActivity"></activity>
 		<activity android:name=".tabactivities.CommentActivity"></activity>
+		<activity android:name="RunMap" android:label="@string/map_name"></activity>
 		
     </application>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-/
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 </manifest>

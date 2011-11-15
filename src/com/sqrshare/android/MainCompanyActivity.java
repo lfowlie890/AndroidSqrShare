@@ -1,6 +1,9 @@
 package com.sqrshare.android;
 
 
+import org.json.JSONObject;
+
+import com.sqrshare.android.connections.RemoteDBAdapter;
 import com.sqrshare.android.tabactivities.CommentActivity;
 import com.sqrshare.android.tabactivities.CompanyInfoActivity;
 import com.sqrshare.android.tabactivities.HoursActivity;
@@ -16,15 +19,26 @@ import android.widget.TabHost;
 
 public class MainCompanyActivity extends TabActivity{
 	
+	private static JSONObject json = null;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.company_main);
+	    
+	    RemoteDBAdapter db = new RemoteDBAdapter("http://sqrs.co/iphone");
+		try {
+			json = db.nodeGet(41);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
 	    Resources res = getResources(); // Resource object to get Drawables
 	    TabHost tabHost = getTabHost();  // The activity TabHost
 	    TabHost.TabSpec spec;  // Resusable TabSpec for each tab
 	    Intent intent;
-	    
+		
+		
 	 // Create an Intent to launch an Activity for the tab (to be reused)
 	    intent = new Intent().setClass(this, CompanyInfoActivity.class);
 
@@ -68,6 +82,10 @@ public class MainCompanyActivity extends TabActivity{
 		shareIntent.putExtra(Intent.EXTRA_SUBJECT, "SqrShare Code");
 		shareIntent.putExtra(Intent.EXTRA_TEXT, "");
 		startActivity(Intent.createChooser(shareIntent, "title"));
+	}
+	
+	public static JSONObject getJSON(){
+		return json;
 	}
 
 }
