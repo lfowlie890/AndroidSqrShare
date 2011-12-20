@@ -8,20 +8,49 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:padding="5dp">
-        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Home" android:id="@+id/home_button"></Button>
-            <ImageButton android:id="@+id/add_favorites_button" android:background="@android:color/transparent" android:src="@drawable/star_selector" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:layout_width="50dp" android:scaleType="fitXY" android:layout_height="50dp"></ImageButton>
-            <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Test Company" android:layout_alignBaseline="@+id/home_button" android:layout_alignBottom="@+id/home_button" android:layout_centerHorizontal="true" android:textSize="20dp"></TextView>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/share_button"
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/share_selector"
+                android:onClick="share" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/add_favorites_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:onClick="favoritePressed"
+                android:src="@drawable/star_open" />
+
+            <TextView
+                android:id="@+id/company_title"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/share_button"
+                android:layout_toRightOf="@+id/add_favorites_button"
+                android:text="Test Company"
+                android:textSize="24dp" />
+
         </RelativeLayout>
-        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="right">
-        	<ImageButton android:src="@drawable/share_selector" android:background="@android:color/transparent" android:layout_width="120dp" android:layout_height="80dp" android:scaleType="fitXY"></ImageButton>
-        </RelativeLayout>
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+        <com.markupartist.android.widget.PullToRefreshListView
+        	android:id="@+id/company_scrollview"
         	android:layout_width="fill_parent"
-        	android:layout_height="fill_parent" 
-        	android:fillViewport="true"
-        	android:overScrollMode="always"
-        	android:scrollY="20dp">
+        	android:layout_height="fill_parent">
         	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
@@ -38,6 +67,6 @@
 		            android:layout_height="fill_parent"
 		            />
 	        </LinearLayout>
-	 	</ScrollView>
+	 	</com.markupartist.android.widget.PullToRefreshListView>
     </LinearLayout>
 </TabHost>

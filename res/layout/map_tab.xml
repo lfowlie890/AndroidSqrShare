@@ -3,13 +3,38 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal" 
+        android:id="@+id/location_layout">
 
-    <com.google.android.maps.MapView
+        <TextView
+            android:id="@+id/location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:lineSpacingMultiplier=".8"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:text="address" />
+
+        <TextView
+            android:id="@+id/url_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:textSize="16dp"
+            android:layout_weight="1"
+            android:text="website" />
+    </LinearLayout>
+    <com.google.android.maps.MapView
         android:id="@+id/mapview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@+id/location_layout"
         android:clickable="true"
         android:apiKey="0EY0k3fA3FPs6M5ECZFCY1VgIhqNsyvd5OA9rMw"
     />
-
 </RelativeLayout>

@@ -132,4 +132,10 @@
   <string name="DOMAIN">sqrs.co</string>
   <string name="ALGORITHM">HmacSHA256</string>
   <string name="SESSION.LIFETIME">1209600</string>
+  <string name="max_history">10</string>
+  
+  <string name="pull_to_refresh_pull_label">Pull to refresh...</string>
+  <string name="pull_to_refresh_release_label">Release to refresh...</string>
+  <string name="pull_to_refresh_refreshing_label">Loading...</string>
+  <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
 </resources>

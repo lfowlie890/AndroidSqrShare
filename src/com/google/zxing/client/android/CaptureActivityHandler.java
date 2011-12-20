@@ -84,11 +84,12 @@ public final class CaptureActivityHandler extends Handler {
       case R.id.decode_succeeded:
         Log.d(TAG, "Got decode succeeded message");
         state = State.SUCCESS;
-        //Bundle bundle = message.getData();
-       // Bitmap barcode = bundle == null ? null :
-       //     (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);
-        //activity.handleDecode((Result) message.obj, barcode);
+        Bundle bundle = message.getData();
+        Bitmap barcode = bundle == null ? null :
+        (Bitmap) bundle.getParcelable(DecodeThread.BARCODE_BITMAP);
+        String result = activity.handleDecode((Result) message.obj, barcode);
         intent = new Intent(activity, MainCompanyActivity.class);
+        intent.putExtra("url", result);
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         break;

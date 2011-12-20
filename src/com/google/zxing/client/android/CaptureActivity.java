@@ -362,7 +362,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
    * @param rawResult The contents of the barcode.
    * @param barcode   A greyscale bitmap of the camera data which was decoded.
    */
-  public void handleDecode(Result rawResult, Bitmap barcode) {
+  public String handleDecode(Result rawResult, Bitmap barcode) {
     inactivityTimer.onActivity();
     lastResult = rawResult;
     ResultHandler resultHandler = ResultHandlerFactory.makeResultHandler(this, rawResult);
@@ -374,33 +374,34 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     } else {
       beepManager.playBeepSoundAndVibrate();
       drawResultPoints(barcode, rawResult);
-      switch (source) {
-        case NATIVE_APP_INTENT:
-        case PRODUCT_SEARCH_LINK:
-          handleDecodeExternally(rawResult, resultHandler, barcode);
-          break;
-        case ZXING_LINK:
-          if (returnUrlTemplate == null){
-            handleDecodeInternally(rawResult, resultHandler, barcode);
-          } else {
-            handleDecodeExternally(rawResult, resultHandler, barcode);
-          }
-          break;
-        case NONE:
-          SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-          if (prefs.getBoolean(PreferencesActivity.KEY_BULK_MODE, false)) {
-            Toast.makeText(this, R.string.msg_bulk_mode_scanned, Toast.LENGTH_SHORT).show();
-            // Wait a moment or else it will scan the same barcode continuously about 3 times
-            if (handler != null) {
-              handler.sendEmptyMessageDelayed(R.id.restart_preview, BULK_MODE_SCAN_DELAY_MS);
-            }
-            resetStatusView();
-          } else {
-            handleDecodeInternally(rawResult, resultHandler, barcode);
-          }
-          break;
-      }
+//      switch (source) {
+//        case NATIVE_APP_INTENT:
+//        case PRODUCT_SEARCH_LINK:
+//          handleDecodeExternally(rawResult, resultHandler, barcode);
+//          break;
+//        case ZXING_LINK:
+//          if (returnUrlTemplate == null){
+//            handleDecodeInternally(rawResult, resultHandler, barcode);
+//          } else {
+//            handleDecodeExternally(rawResult, resultHandler, barcode);
+//          }
+//          break;
+//        case NONE:
+//          SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//          if (prefs.getBoolean(PreferencesActivity.KEY_BULK_MODE, false)) {
+//            Toast.makeText(this, R.string.msg_bulk_mode_scanned, Toast.LENGTH_SHORT).show();
+//            // Wait a moment or else it will scan the same barcode continuously about 3 times
+//            if (handler != null) {
+//              handler.sendEmptyMessageDelayed(R.id.restart_preview, BULK_MODE_SCAN_DELAY_MS);
+//            }
+//            resetStatusView();
+//          } else {
+//            handleDecodeInternally(rawResult, resultHandler, barcode);
+//          }
+//          break;
+//      }
     }
+    return rawResult.getText();
   }
 
   /**

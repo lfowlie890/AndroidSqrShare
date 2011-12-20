@@ -15,7 +15,8 @@ public class CompanyInfoActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		 
+		setContentView(R.layout.description_tab); 
+		
 		JSONObject json = MainCompanyActivity.getJSON();
 		String mainbody = null;
 		try {
@@ -24,14 +25,12 @@ public class CompanyInfoActivity extends Activity {
 			JSONObject o = und.getJSONObject(0);
 			mainbody = o.getString("value");
 		} catch (JSONException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 
-        TextView textview = new TextView(this);
+        TextView textview = (TextView) findViewById(R.id.description_text);
         textview.setText(mainbody);
-
-        setContentView(textview);
+        
 	}
 
 }
