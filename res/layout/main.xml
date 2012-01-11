@@ -22,7 +22,7 @@
         <ImageButton android:onClick="showFavorites" android:src="@drawable/favorite_selector" android:background="@android:color/transparent" android:id="@+id/view_favorites_button" android:layout_gravity="bottom" android:scaleType="fitXY" android:layout_height="131dp" android:layout_weight="0.50" android:layout_width="match_parent"></ImageButton>
         <ImageButton android:src="@drawable/history_selector" 
 	        android:id="@+id/view_history_button" 
-	        android:onClick="show"
+	        android:onClick="showHistory"
 	        android:background="@android:color/transparent" android:scaleType="fitXY" android:layout_gravity="bottom" android:layout_height="131dp" android:layout_weight="0.50" android:layout_width="match_parent"></ImageButton>
 	</LinearLayout>
 </LinearLayout>

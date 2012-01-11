@@ -53,17 +53,18 @@ public class AndroidSqrShareActivity extends Activity {
     }
     
     public void showHistory(View v){
-    	
+    	startActivity(new Intent(context, HistoryActivity.class));
     }
     
     public void showFavorites(View v){
-    	
+    	startActivity(new Intent(context, FavoritesActivity.class));
     }
     
     private class DoubleTapListener extends GestureDetector.SimpleOnGestureListener{
     	
     	@Override
     	public boolean onDoubleTapEvent(MotionEvent e){
+    		MainCompanyActivity.setJSON(null);
     		startActivity(new Intent(context, CaptureActivity.class));
 			return true;
     		

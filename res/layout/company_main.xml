@@ -47,10 +47,13 @@
 
         </RelativeLayout>
 
-        <com.markupartist.android.widget.PullToRefreshListView
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         	android:id="@+id/company_scrollview"
         	android:layout_width="fill_parent"
-        	android:layout_height="fill_parent">
+        	android:layout_height="fill_parent" 
+        	android:fillViewport="true"
+        	android:overScrollMode="always"
+        	android:scrollY="20dp">
         	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         		android:orientation="vertical"
         		android:layout_width="fill_parent"
@@ -67,6 +70,6 @@
 		            android:layout_height="fill_parent"
 		            />
 	        </LinearLayout>
-	 	</com.markupartist.android.widget.PullToRefreshListView>
+	 	</ScrollView>
     </LinearLayout>
 </TabHost>

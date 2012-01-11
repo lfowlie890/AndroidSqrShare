@@ -67,6 +67,8 @@
 		<activity android:name=".tabactivities.PhotosActivity"></activity>
 		<activity android:name=".tabactivities.CommentActivity"></activity>
 		<activity android:name="RunMap" android:label="@string/map_name"></activity>
+		<activity android:name=".FavoritesActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
+		<activity android:name=".HistoryActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
 		
     </application>
     <uses-permission android:name="android.permission.CAMERA"/>

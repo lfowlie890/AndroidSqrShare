@@ -35,64 +35,74 @@ public class MainCompanyActivity extends TabActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.company_main);
-	    
-	    System.out.print("URL: ");
-	    Bundle extras = getIntent().getExtras();
-	    String value = null;
-	    if(extras !=null)
-	    {
-	    	value = extras.getString("url");
-	    	System.out.println(value);
-	    	if (value != null && value.startsWith("http://sqrs.co/r/")){
-	    		nodeId = value.substring(17);
-	    	}
-	    }
 	    favorites = getSharedPreferences("sqrshare_favorites", 0);
 	    history = getSharedPreferences("sqrshare_history", 0);
-	    String jsonString = favorites.getString(nodeId, null);
-	    if (jsonString != null){
+	    if (json != null) {
+	    	String jsonString = null;
 	    	try {
-				json = new JSONObject(jsonString);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-	    	
-	    	ImageButton favoriteButton = (ImageButton) findViewById(R.id.add_favorites_button);
-	    	favoriteButton.setImageResource(R.drawable.star);
-	    	favorite = true;
-	    }
-	    else if (!nodeId.equals("-1")){
-	    //Read more: http://getablogger.blogspot.com/2008/01/android-pass-data-to-activity.html#ixzz1gHchwxVN
-		    RemoteDBAdapter db = new RemoteDBAdapter("http://sqrs.co/iphone");
-			try {
-				json = db.nodeGet(Integer.parseInt(nodeId));
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+	    		nodeId = json.getString("vid");
+	    		jsonString = favorites.getString(nodeId, null);
+	    		if (jsonString != null){
+	    			setFavorite();
+		    	}
+			} catch (JSONException e1) {
 				e1.printStackTrace();
-			}
+			}	
 	    }
-	    else{
-	    	//TODO handle nonsqrshare codes
+	    else {
+		    System.out.print("URL: ");
+		    Bundle extras = getIntent().getExtras();
+		    String value = null;
+		    if(extras != null)
+		    {
+		    	value = extras.getString("url");
+		    	System.out.println(value);
+		    	if (value != null && value.startsWith("http://sqrs.co/r/")){
+		    		nodeId = value.substring(17);
+		    	}
+		    }
+		    String jsonString = favorites.getString(nodeId, null);
+		    if (jsonString != null){
+		    	try {
+					json = new JSONObject(jsonString);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+		    	
+		    	setFavorite();
+		    }
+		    else if (!nodeId.equals("-1")){
+		    //Read more: http://getablogger.blogspot.com/2008/01/android-pass-data-to-activity.html#ixzz1gHchwxVN
+			    RemoteDBAdapter db = new RemoteDBAdapter("http://sqrs.co/iphone");
+				try {
+					json = db.nodeGet(Integer.parseInt(nodeId));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		    }
+		    else{
+		    	//TODO handle nonsqrshare codes
+		    }
+		    
+		    int max_history = Integer.parseInt(getString(R.string.max_history));
+		    Editor histEditor = history.edit();
+		    int size = history.getAll().size();
+		    if (size < max_history){
+		    	histEditor.putString("" + System.currentTimeMillis(), json.toString());
+		    }
+		    else{
+		    	Set<String> timestamps = history.getAll().keySet();
+		    	String oldest_time = "-1";
+		    	for (String t : timestamps){
+		    		if (Long.parseLong(oldest_time) < Long.parseLong(t))
+		    			oldest_time = t;
+		    	}
+		    	histEditor.remove(oldest_time);
+		    	histEditor.putString("" + System.currentTimeMillis(), json.toString());
+		    }
+		    histEditor.commit();
 	    }
-	    
-	    int max_history = Integer.parseInt(getString(R.string.max_history));
-	    Editor histEditor = history.edit();
-	    int size = history.getAll().size();
-	    if (size < max_history){
-	    	histEditor.putString("" + System.currentTimeMillis(), json.toString());
-	    }
-	    else{
-	    	Set<String> timestamps = history.getAll().keySet();
-	    	String oldest_time = "-1";
-	    	for (String t : timestamps){
-	    		if (Long.parseLong(oldest_time) < Long.parseLong(t))
-	    			oldest_time = t;
-	    	}
-	    	histEditor.remove(oldest_time);
-	    	histEditor.putString("" + System.currentTimeMillis(), json.toString());
-	    }
-	    histEditor.commit();
-	    
 	    Resources res = getResources(); // Resource object to get Drawables
 	    TabHost tabHost = getTabHost();  // The activity TabHost
 	    TabHost.TabSpec spec;  // Resusable TabSpec for each tab
@@ -141,7 +151,13 @@ public class MainCompanyActivity extends TabActivity{
 
 	    tabHost.setCurrentTab(0);
 	}
-	
+
+	private void setFavorite() {
+    	ImageButton favoriteButton = (ImageButton) findViewById(R.id.add_favorites_button);
+    	favoriteButton.setImageResource(R.drawable.star);
+    	favorite = true;
+	}
+
 	public void share(View v){
 		Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
@@ -165,14 +181,21 @@ public class MainCompanyActivity extends TabActivity{
 		}
 		else{
 			favEditor.putString(nodeId, json.toString());
-	    	((ImageButton) v).setImageResource(R.drawable.star);
-	    	favorite = true;
+	    	setFavorite();
 	    	favEditor.commit();
 		}
 	}
 	
+	public void onStop(){
+		json = null;
+		super.onStop();
+	}
+	
 	public static JSONObject getJSON(){
 		return json;
+	}
+	public static void setJSON(JSONObject j){
+		json = j;
 	}
 
 }
