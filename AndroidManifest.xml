@@ -59,8 +59,14 @@
 	        <data android:scheme="http" android:host="www.google.co.uk" android:path="/m/products/scan"/>
 	      </intent-filter>
 	    </activity>
-	    <activity android:name=".MainCompanyActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait">
+	    <activity android:name=".QRCodeActivity" android:label="@string/custom_share" android:icon="@drawable/qrcode" android:theme="@android:style/Theme.NoTitleBar">
+	        <intent-filter>
+				<action android:name="android.intent.action.SEND" />
+				<data android:mimeType="text/plain" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
 	    </activity>
+	    <activity android:name=".MainCompanyActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
 	    <activity android:name=".tabactivities.CompanyInfoActivity"></activity>
 		<activity android:name=".tabactivities.LocationActivity"></activity>
 		<activity android:name=".tabactivities.HoursActivity"></activity>

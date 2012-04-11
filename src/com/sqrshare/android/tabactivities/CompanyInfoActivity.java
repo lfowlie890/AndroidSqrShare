@@ -18,19 +18,20 @@ public class CompanyInfoActivity extends Activity {
 		setContentView(R.layout.description_tab); 
 		
 		JSONObject json = MainCompanyActivity.getJSON();
-		String mainbody = null;
-		try {
-			JSONObject body = json.getJSONObject("body");
-			JSONArray und = body.getJSONArray("und");
-			JSONObject o = und.getJSONObject(0);
-			mainbody = o.getString("value");
-		} catch (JSONException e2) {
-			e2.printStackTrace();
+		if (json != null){
+			String mainbody = null;
+			try {
+				JSONObject body = json.getJSONObject("body");
+				JSONArray und = body.getJSONArray("und");
+				JSONObject o = und.getJSONObject(0);
+				mainbody = o.getString("value");
+			} catch (JSONException e2) {
+				e2.printStackTrace();
+			}
+	
+	        TextView textview = (TextView) findViewById(R.id.description_text);
+	        textview.setText(mainbody);
 		}
-
-        TextView textview = (TextView) findViewById(R.id.description_text);
-        textview.setText(mainbody);
-        
 	}
 
 }

@@ -4,5 +4,9 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="C:/Users/luke/workspace/AndroidSqrShare/core.jar"/>
+	<classpathentry kind="lib" path="httpclient-4.1.3.jar"/>
+	<classpathentry kind="lib" path="httpcore-4.1.4.jar"/>
+	<classpathentry kind="lib" path="commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

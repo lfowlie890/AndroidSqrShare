@@ -1,5 +1,7 @@
 package com.sqrshare.android.tabactivities;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sqrshare.android.MainCompanyActivity;
@@ -27,6 +29,42 @@ public class HoursActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		JSONObject json = MainCompanyActivity.getJSON();
+        if (json != null) {
+			try {
+				JSONObject from_time = json.getJSONObject("field_repeat_hours_from");
+				JSONArray und = from_time.getJSONArray("und");
+				JSONObject o = und.getJSONObject(0);
+				String from = o.getString("value");
+				JSONObject to_time = json.getJSONObject("field_repeat_hours_to");
+				und = to_time.getJSONArray("und");
+				o = und.getJSONObject(0);
+				String to = o.getString("value");
+				JSONObject repeats = json.getJSONObject("field_repeat_days");
+				und = repeats.getJSONArray("und");
+				for (int i = 0; i < und.length(); i++){
+					o = und.getJSONObject(i);
+					String day = o.getString("value");
+					if (day.equals(days[0]))
+						hours[0] = from + " - " + to;
+					else if (day.equals(days[1]))
+						hours[1] = from + " - " + to;
+					else if (day.equals(days[2]))
+						hours[2] = from + " - " + to;
+					else if (day.equals(days[3]))
+						hours[3] = from + " - " + to;
+					else if (day.equals(days[4]))
+						hours[4] = from + " - " + to;
+					else if (day.equals(days[5]))
+						hours[5] = from + " - " + to;
+					else if (day.equals(days[6]))
+						hours[6] = from + " - " + to;
+				}
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
         HoursListAdapter adapter= new HoursListAdapter(this);
         setListAdapter(adapter);
 
@@ -57,8 +95,10 @@ public class HoursActivity extends ListActivity {
 		public View getView(int position, View view, ViewGroup group) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View rowView = inflater.inflate(R.layout.hours, null);
-			TextView textView = (TextView) rowView.findViewById(R.id.day);
-			textView.setText(days[position]);
+			TextView daysView = (TextView) rowView.findViewById(R.id.day);
+			daysView.setText(days[position]);
+			TextView hoursView = (TextView) rowView.findViewById(R.id.hours);
+			hoursView.setText(hours[position]);
 			return rowView;
 		}
 		

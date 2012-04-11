@@ -108,6 +108,8 @@ public class MainCompanyActivity extends TabActivity{
 	    TabHost.TabSpec spec;  // Resusable TabSpec for each tab
 	    Intent intent;
 		
+	    QRCodeActivity.setId(Integer.parseInt(nodeId));
+	    
 		TextView title = ((TextView)findViewById(R.id.company_title));
 		try {
 			title.setText(json.getString("title"));

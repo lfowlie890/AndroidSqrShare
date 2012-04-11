@@ -15,7 +15,9 @@ public class RestClient {
 
     public enum RequestMethod {
         GET,
-        POST
+        POST,
+        LOGIN,
+        LOGOUT
     }
 
     private ArrayList <NameValuePair> params;

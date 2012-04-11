@@ -6,31 +6,36 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.sqrshare.android.R;
+
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
+import android.widget.Gallery;
 import android.widget.ImageView;
 
 public class ImageAdapter extends BaseAdapter{
 	
     private Context context;
-    private String[] imageUrls = null;
-    private ImageView[] imageViews = null;
+    private Bitmap[] images = null;
+    private int itemBackground;
 
-    public ImageAdapter(Context c, String[] images) {
+    public ImageAdapter(Context c, Bitmap[] images) {
         context = c;
-        imageUrls = images;
-        if (imageUrls != null)
-        	imageViews = new ImageView[imageUrls.length];
+        this.images = images;
+        TypedArray a = c.obtainStyledAttributes(R.styleable.Gallery);
+        itemBackground = a.getResourceId(
+            R.styleable.Gallery_android_galleryItemBackground, 0);
+        a.recycle();  
+        
     }
 
     public int getCount() {
-        return imageUrls.length;
+        return images.length;
     }
 
     public Object getItem(int position) {
@@ -43,40 +48,22 @@ public class ImageAdapter extends BaseAdapter{
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-    	if (convertView == null) {  // if it's not recycled, initialize some attributes
-        	imageViews[position] = new ImageView(context);
-        	imageView = imageViews[position];
-        	imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(1, 1, 1, 1);
-        } else {
-            imageView = (ImageView) convertView;
-        }
-		Bitmap bm = downloadFile(imageUrls[position]);
-		imageViews[position].setImageBitmap(bm);
+//        ImageView imageView;
+//    	if (convertView == null) {  // if it's not recycled, initialize some attributes
+//        	imageViews[position] = new ImageView(context);
+//        	imageView = imageViews[position];
+//        	imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+//            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+//            imageView.setPadding(1, 1, 1, 1);
+//        } else {
+//            imageView = (ImageView) convertView;
+//        }
+    	ImageView imageView = new ImageView(context);
+		Bitmap bm = images[position];
+		imageView.setImageBitmap(bm);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setLayoutParams(new Gallery.LayoutParams(150, 120));
+        imageView.setBackgroundResource(itemBackground);
         return imageView;
-    }
-    
-    private Bitmap downloadFile(String fileUrl){
-    	Bitmap bmImg = null;
-    	URL myFileUrl = null; 
-    	try {
-    		myFileUrl= new URL(fileUrl);
-    	} 
-    	catch (MalformedURLException e) {
-    		e.printStackTrace();
-    	}
-    	try {
-	    	HttpURLConnection conn= (HttpURLConnection)myFileUrl.openConnection();
-	    	conn.setDoInput(true);
-	    	conn.connect();
-	    	InputStream is = conn.getInputStream();
-	    	bmImg = BitmapFactory.decodeStream(is);
-    	}
-    	catch (IOException e) {
-    		e.printStackTrace();
-    	}
-    	return bmImg;
     }
 }
