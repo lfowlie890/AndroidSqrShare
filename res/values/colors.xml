@@ -38,4 +38,8 @@
   <color name="viewfinder_frame">#ff000000</color>
   <color name="viewfinder_laser">#ffff0000</color>
   <color name="viewfinder_mask">#60000000</color>
+  <color name="sqrshare_default">#ff153147</color>
+  <color name="semiclear_gray">#77808080</color>
+  <color name="button_pressed_start">#ff4ba4eb</color>
+  <color name="button_pressed_end">#ff4ea7ee</color>
 </resources>

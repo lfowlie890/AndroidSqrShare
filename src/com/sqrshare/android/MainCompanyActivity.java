@@ -20,6 +20,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class MainCompanyActivity extends TabActivity{
 	    if (json != null) {
 	    	String jsonString = null;
 	    	try {
-	    		nodeId = json.getString("vid");
+	    		nodeId = json.getString("nid");
 	    		jsonString = favorites.getString(nodeId, null);
 	    		if (jsonString != null){
 	    			setFavorite();
@@ -161,7 +162,7 @@ public class MainCompanyActivity extends TabActivity{
 	}
 
 	public void share(View v){
-		Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
 		try {
 			shareIntent.putExtra(Intent.EXTRA_SUBJECT, "awesome SqrShare deal from " + json.getString("title"));
@@ -186,11 +187,6 @@ public class MainCompanyActivity extends TabActivity{
 	    	setFavorite();
 	    	favEditor.commit();
 		}
-	}
-	
-	public void onStop(){
-		json = null;
-		super.onStop();
 	}
 	
 	public static JSONObject getJSON(){

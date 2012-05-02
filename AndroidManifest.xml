@@ -67,6 +67,7 @@
 			</intent-filter>
 	    </activity>
 	    <activity android:name=".MainCompanyActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"></activity>
+	    <activity android:name=".LoginActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
 	    <activity android:name=".tabactivities.CompanyInfoActivity"></activity>
 		<activity android:name=".tabactivities.LocationActivity"></activity>
 		<activity android:name=".tabactivities.HoursActivity"></activity>
@@ -75,6 +76,8 @@
 		<activity android:name="RunMap" android:label="@string/map_name"></activity>
 		<activity android:name=".FavoritesActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
 		<activity android:name=".HistoryActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
+		<activity android:name=".user.UserLogin"></activity>
+		<activity android:name=".user.UserLogout"></activity>
 		
     </application>
     <uses-permission android:name="android.permission.CAMERA"/>

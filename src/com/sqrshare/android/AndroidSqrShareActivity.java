@@ -1,10 +1,15 @@
 package com.sqrshare.android;
 
+import org.json.JSONObject;
+
 import com.google.zxing.client.android.CaptureActivity;
+import com.sqrshare.android.connections.RemoteDBAdapter;
+import com.sqrshare.android.user.UserLogin;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -16,6 +21,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class AndroidSqrShareActivity extends Activity {
     /** Called when the activity is first created. */
@@ -29,6 +35,8 @@ public class AndroidSqrShareActivity extends Activity {
         setContentView(R.layout.main);
         
         context = this;
+        
+        new UserLogin().execute(this);
         
         DoubleTapListener l = new DoubleTapListener();
         detector = new GestureDetector(this, l);

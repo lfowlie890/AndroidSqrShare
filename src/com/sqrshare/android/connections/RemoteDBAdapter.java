@@ -27,7 +27,19 @@ public class RemoteDBAdapter {
 
     }
     
-    public String login(String userName, String password) throws Exception
+    public int comment(String comment, String companyID) throws Exception{
+    	RestClient c = new RestClient(server + "/comment");
+        c.AddHeader("Accept", "application/json");
+        c.AddHeader("Content-type", "application/json");
+        c.AddParam("comment_body", comment);
+        c.AddParam("language", "und");
+        c.AddParam("nid", companyID);
+        
+        c.Execute(RequestMethod.POST);
+        return c.getResponseCode();
+    }
+    
+    public int login(String userName, String password) throws Exception
     {
         RestClient c = new RestClient(server + "/system/connect.json");
         c.AddHeader("Accept", "application/json");
@@ -43,17 +55,17 @@ public class RemoteDBAdapter {
         c.AddParam("username", userName);
         c.AddParam("password", password);
         c.Execute(RequestMethod.POST);
-        return c.getResponse();
+        return c.getResponseCode();
     }
     
-    public String logout() throws Exception
+    public int logout() throws Exception
     {
         RestClient c = new RestClient(server + "/user/logout.json");
         c.AddHeader("Accept", "application/json");
         c.AddHeader("Content-type", "application/json");
         c.AddParam("sessid", current_session);
         c.Execute(RequestMethod.POST);
-        return c.getResponse();
+        return c.getResponseCode();
     }
 
 }
